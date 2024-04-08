@@ -14,7 +14,7 @@ on:
 
 
 jobs:
-  call-build-releas-tag-repo:
+  call-build-release-tag-repo:
     uses: zack53/rust-workflows/.github/workflows/build-tag.yml@028603077a309657eb20ff18a183bd9847ddab87
     with:
       releaseTagType: ${{ github.event.inputs.releaseTagType }}
