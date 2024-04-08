@@ -1,3 +1,4 @@
+# To be ran in application root directory of project
 mkdir .github
 mkdir .github/workflows
 
