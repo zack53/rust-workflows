@@ -1,0 +1,16 @@
+name: Release
+
+on:
+  push:
+    tags: [ '[0-9]+.[0-9]+.[0-9]+', 'v[0-9]+.[0-9]+.[0-9]+' ]
+
+jobs:
+  release-prod:
+    uses: zack53/rust-workflows/.github/workflows/release.yml@482b7d7a272712d9fbbb885aeb6fa8cf778182e4
+    with:
+      DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+      RELEASE_ENVIRONMENT: 'prod'
+    secrets:
+      PAT: ${{ secrets.PAT }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+

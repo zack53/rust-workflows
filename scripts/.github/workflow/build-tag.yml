@@ -1,0 +1,38 @@
+name: Build Release Tag
+
+on:
+  workflow_call:
+    inputs:
+      releaseTagType:
+        type: string
+        description: 'Select tag increment level'
+        required: true
+    secrets:
+      PAT:
+        required: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+#control branch manual action limitation https://stackoverflow.com/questions/74633548/how-to-allow-manual-workflow-dispatch-only-on-specific-branches
+jobs:
+  build-tag:
+    runs-on: ubuntu-latest
+    container:
+      image: zack53/rust-cargo-release:1.77
+    steps:
+      - run: git config --global --add safe.directory *
+      - name: checkout repo
+        uses: actions/checkout@v3.1.0
+        with:
+          repository: ${{ env.GITHUB_REPOSITORY }}
+          token: ${{ secrets.PAT }}
+      - name: Set github url and credentials
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "GitHub Actions [Bot]"
+          /usr/bin/git config --global --add url."https://${{ secrets.PAT }}:x-oauth-basic@github".insteadOf ssh://git@github
+          /usr/bin/git config --global --add url."https://${{ secrets.PAT }}:x-oauth-basic@github".insteadOf https://github
+          /usr/bin/git config --global --add url."https://${{ secrets.PAT }}:x-oauth-basic@github".insteadOf git@github
+      - run: cargo-release release ${{ inputs.releaseTagType }} --no-publish --execute --no-confirm
+      - run: cargo-release release alpha --no-publish --execute --no-tag --no-confirm

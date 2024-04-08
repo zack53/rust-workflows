@@ -1,0 +1,11 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    uses: zack53/rust-workflows/.github/workflows/ci-build-test.yml@fe350330d472fce2fad38f00127f708f822f00df
+    secrets:
+      PAT: ${{ secrets.PAT }}
