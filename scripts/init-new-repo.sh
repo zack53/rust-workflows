@@ -1,2 +1,2 @@
-./get-github-workflows.sh
-./build-base-docker.image.sh
+wget  wget -O - https://raw.githubusercontent.com/zack53/rust-workflows/main/scripts/get-github-workflows.sh | bash
+wget  wget -O - https://raw.githubusercontent.com/zack53/rust-workflows/main/scripts/build-base-docker.image.sh | bash
