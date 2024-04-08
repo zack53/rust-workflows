@@ -1,23 +1,6 @@
 # rust-workflows
-Example usage:
-```
-name: Build Release Tag
-
-on:
-  workflow_dispatch:
-    inputs:
-      releaseTagType:
-        type: choice
-        options: [patch, minor, major, alpha, beta, rc]
-        description: 'Select tag increment level'
-        required: true
+Example usages of workflows can be found in examples directory
 
 
-jobs:
-  call-build-release-tag-repo:
-    uses: zack53/rust-workflows/.github/workflows/build-tag.yml@028603077a309657eb20ff18a183bd9847ddab87
-    with:
-      releaseTagType: ${{ github.event.inputs.releaseTagType }}
-    secrets:
-      PAT: ${{ secrets.PAT }}
-```
+To init repo with new files needed for Rust use following command:
+wget -O - --no-cache https://raw.githubusercontent.com/zack53/rust-workflows/main/scripts/init-new-repo.sh | bash
