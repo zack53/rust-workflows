@@ -1,4 +1,4 @@
-FROM rust:1.77-alpine as builder
+FROM rust:1.81-alpine as builder
 
 ARG PAT
 
