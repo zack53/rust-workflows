@@ -19,7 +19,7 @@ jobs:
   build-tag:
     runs-on: ubuntu-latest
     container:
-      image: zack53/rust-cargo-release:1.77
+      image: zack53/rust-cargo-release:1.81
     steps:
       - run: git config --global --add safe.directory *
       - name: checkout repo
